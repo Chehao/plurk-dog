@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<friends>
+	<user id="4052569" name="chehao_hsiao">
+		<subscribe>
+		<![CDATA[
+			http://api.flickr.com/services/feeds/photos_friends.gne?user_id=32888195@N00&friends=0&display_all=1&lang=zh-hk&format=rss_200
+		]]>	
+		</subscribe>
+		<familiar>10006</familiar>
+	</user>
+	<user id="4103958" name="little_dog">
+		<subscribe>http://api.flickr.com/services/feeds/groups_pool.gne?id=700597@N20&amp;lang=zh-hk&amp;format=rss_200</subscribe> 
+		<familiar>*</familiar>
+	</user> 
+	<globaluser>
+		<subscribe>http://api.flickr.com/services/feeds/groups_pool.gne?id=21475196@N00&amp;lang=zh-hk&amp;format=rss_200</subscribe>
+		<subscribe>
+			<![CDATA[
+			  http://gnn.gamer.com.tw/rss.xml
+			]]>
+		</subscribe>				
+		<subscribe>
+			<![CDATA[http://chinese.engadget.com/rss.xml]]>
+		</subscribe>	
+	</globaluser>  
+
+</friends>
