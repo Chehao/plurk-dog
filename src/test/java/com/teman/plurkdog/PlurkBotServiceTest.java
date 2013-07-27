@@ -5,6 +5,7 @@ import java.util.List;
 import org.json.JSONException;
 
 import com.google.jplurk.Qualifier;
+import com.google.jplurk.exception.PlurkException;
 import com.teman.plurkdog.bean.PlurkAlert;
 import com.teman.plurkdog.bean.PlurkMsg;
 import com.teman.plurkdog.bean.PlurkUser;
@@ -72,7 +73,7 @@ public class PlurkBotServiceTest extends TestBase {
 		
 	}*/
 	
-	public void testRePlurk(){
+	public void testRePlurk() throws PlurkException{
 		RespMsg remsg = botService.doRePlurk(Qualifier.SAYS, "350574787", "還好啦");
 		System.out.println(remsg);
 	}

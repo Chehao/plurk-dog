@@ -14,6 +14,7 @@ import org.json.JSONException;
 import com.google.jplurk.Gender;
 import com.google.jplurk.PlurkClient;
 import com.google.jplurk.Qualifier;
+import com.google.jplurk.exception.PlurkException;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.teman.plurkdog.PlurkFilter;
 import com.teman.plurkdog.RSSConfig;
@@ -293,6 +294,10 @@ public class PlurkBotService extends BaseService {
 			} catch (InterruptedException e) {
 				logger.error(e);
 			} catch (JSONException e) {
+				logger.error(e);
+			} catch (NumberFormatException e) {
+				logger.error(e);
+			} catch (PlurkException e) {
 				logger.error(e);
 			}
 			if (j > count) {

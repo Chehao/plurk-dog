@@ -39,9 +39,7 @@ public class UserService {
 			client = new PlurkClient(new PlurkSettings(settingCofingFile));
 		} catch (Exception e) {
 			logger.error(e,e);
-		} catch (PlurkException e) {
-			logger.error(e,e);
-		}		
+		}  	
 	}
 
 	/**
@@ -65,17 +63,20 @@ public class UserService {
 	 * @param password
 	 */
 	public void login(String username, String password) {
-		JSONObject rep = client.login(username, password);
-		
-		//logger.debug(rep);
-		if (rep != null && !StringUtils.isEmpty(rep.toString())) {
-			try {
+
+		// logger.debug(rep);
+		try {
+			JSONObject rep = client.login(username, password);
+			if (rep != null && !StringUtils.isEmpty(rep.toString())) {
 				this.user = new PlurkUser(rep.getJSONObject("user_info"));
-			} catch (JSONException e) {
-				logger.error(e, e);
 			}
-			logger.debug(user);
+		} catch (JSONException e) {
+			logger.error(e, e);
+		} catch (PlurkException e) {
+			logger.error(e, e);
 		}
+		logger.debug(user);
+
 	}
 
 	public void logout(){

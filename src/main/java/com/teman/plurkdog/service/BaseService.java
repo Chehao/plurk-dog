@@ -12,6 +12,7 @@ import com.google.jplurk.CommentBy;
 import com.google.jplurk.DateTime;
 import com.google.jplurk.Lang;
 import com.google.jplurk.Qualifier;
+import com.google.jplurk.exception.PlurkException;
 import com.teman.plurkdog.PlurkUtils;
 import com.teman.plurkdog.bean.PlurkAlert;
 import com.teman.plurkdog.bean.PlurkMsg;
@@ -179,6 +180,8 @@ public class BaseService {
 			return resp.getString("success_text").equals("ok");
 		} catch (JSONException e) {
 			logger.error(e.getMessage());
+		} catch (PlurkException e) {
+			logger.error(e.getMessage());
 		}
 		return false;
 	}
@@ -198,6 +201,8 @@ public class BaseService {
 			return resp.getString("success_text").equals("ok");
 		} catch (JSONException e) {
 			logger.error(e.getMessage());
+		} catch (PlurkException e) {
+			logger.error(e.getMessage());
 		}
 		return false;
 	}
@@ -215,6 +220,8 @@ public class BaseService {
 			logger.info(resp);
 			return resp.getString("success_text").equals("ok");
 		} catch (JSONException e) {
+			logger.error(e);
+		} catch (PlurkException e) {
 			logger.error(e);
 		}
 		return false;
@@ -234,6 +241,8 @@ public class BaseService {
 			return resp.getString("success_text").equals("ok");
 		} catch (JSONException e) {
 			logger.error(e);
+		} catch (PlurkException e) {
+			logger.error(e);
 		}
 		return false;
 	}
@@ -251,6 +260,8 @@ public class BaseService {
 			return resp.getString("success_text").equals("ok");
 		} catch (JSONException e) {
 			logger.error(e);
+		} catch (PlurkException e) {
+			logger.error(e);
 		}
 		return false;
 	}
@@ -267,6 +278,8 @@ public class BaseService {
 			logger.info(resp);
 			return resp.getString("success_text").equals("ok");
 		} catch (JSONException e) {
+			logger.error(e);
+		} catch (PlurkException e) {
 			logger.error(e);
 		}
 		return false;
@@ -306,8 +319,9 @@ public class BaseService {
 	 * @param qu
 	 * @param content
 	 * @throws JSONException 
+	 * @throws PlurkException 
 	 */
-	public PlurkMsg doPlurk(Qualifier qu, String content) throws JSONException {
+	public PlurkMsg doPlurk(Qualifier qu, String content) throws JSONException, PlurkException {
 		logger.info("[Plurk]....");
 		JSONObject resp = null;		 
 		resp = userService.getClient().plurkAdd(content, qu,Lang.tr_ch );
@@ -318,20 +332,23 @@ public class BaseService {
 	
 	/**
 	 * 私噗
+	 * 
 	 * @param qu
 	 * @param content
 	 * @param limited
 	 * @return
 	 * @throws JSONException
+	 * @throws PlurkException
 	 */
 	public PlurkMsg doPlurk(Qualifier qu, String content, int[] limited)
-			throws JSONException {
-				logger.info("[Plurk]....");		
-				JSONObject resp = null;		 
-				resp = userService.getClient().plurkAdd(content, qu,new JSONArray(limited).toString(),CommentBy.All,Lang.tr_ch );
-				logger.debug(resp);
-				return new PlurkMsg(resp);
-			}
+			throws JSONException, PlurkException {
+		logger.info("[Plurk]....");
+		JSONObject resp = null;
+		resp = userService.getClient().plurkAdd(content, qu,
+				new JSONArray(limited).toString(), CommentBy.All, Lang.tr_ch);
+		logger.debug(resp);
+		return new PlurkMsg(resp);
+	}
 
 	/**
 	 * 回應噗文
@@ -339,8 +356,9 @@ public class BaseService {
 	 * @param plurkId
 	 * @param message
 	 * @return
+	 * @throws PlurkException 
 	 */
-	public RespMsg doRePlurk(Qualifier qu, String plurkId, String message) {
+	public RespMsg doRePlurk(Qualifier qu, String plurkId, String message) throws PlurkException {
 		logger.info("[RePlurk]....");		
 		JSONObject resp = null;		 
 		resp = userService.getClient().responseAdd(plurkId, message, qu);
